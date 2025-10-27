@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="calculator">
-            <form>
+            <form >
                 <!-- display results of calculation -->
                 <div class="display">
                     <input type="text" name="display">
@@ -52,5 +52,46 @@
             </form>
         </div>
     </div>
+
+    <!-- allow calculator with keyboard input -->
+    <script>
+        const display = document.querySelector('input[name="display"]')
+
+        // this will keep focus on display for typing in keyboard
+        window.onload = () => display.focus()
+
+        document.addEventListener('keydown',(e)=>{
+            let key = e.key
+        })
+
+             // if you enter or pressed "=" then it will calculate
+         if(key === "Enter" || key === "=" ){
+           e.preventDefault()
+            try {
+                display.value = eval(display.value)
+            } catch (error) {
+               display.value = "Error" 
+            }
+         
+        }
+      
+
+        // if key is a number or math operator
+       else if("0123456789+-/.*".includes(key)){
+            display.value += key
+        }
+
+
+        // if you press backspace it will delete last number
+        else if(key === "backspace"){
+            display.value = display.value.slice(0,-1)
+        }
+
+        // if esc is pressed then it will delete everthing
+
+        else if(key === "Escape"){
+            display.value = ""
+        }
+    </script>
 </body>
 </html>
